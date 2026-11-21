@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>دعوة إلى ختمة — سند</title>
+<link rel="stylesheet" href="../style.css">
+<style>
+  .code { font: 700 2rem/1.4 ui-monospace, monospace; letter-spacing: .2em; direction: ltr; text-align: center; margin: 1rem 0; }
+  .actions { display: grid; gap: .75rem; margin: 1.25rem 0; }
+  .btn { display: block; text-align: center; padding: .9rem 1rem; border-radius: 999px; font-weight: 700; text-decoration: none; border: 0; font: inherit; cursor: pointer; }
+  .btn.primary { background: #c9a227; color: #1a1c2e; }
+  .btn.ghost { background: transparent; border: 1.5px solid currentColor; color: inherit; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+<h1>دُعيت إلى ختمة</h1>
+<p>ختمة القرآن مع أسرتك أو أصدقائك في تطبيق «سند»: لكلٍّ أجزاؤه، وتكتمل الختمة بالجميع.</p>
+
+<section id="ok" hidden>
+  <p>رمز الدعوة:</p>
+  <p class="code" id="code"></p>
+  <div class="actions">
+    <a class="btn primary" id="open">افتح الدعوة في سند</a>
+    <button class="btn ghost" id="copy" type="button">انسخ الرمز</button>
+  </div>
+  <p id="copied" role="status" class="meta"></p>
+  <h2>لم يُفتح التطبيق؟</h2>
+  <ol>
+    <li>ثبّت تطبيق «سند» من متجر التطبيقات.</li>
+    <li>افتح «الرقية» ← «ختمة مع أسرتك» ← «لدي رمز دعوة».</li>
+    <li>الصق الرمز (إن نسخته الآن يقترحه التطبيق عليك).</li>
+  </ol>
+</section>
+
+<section id="bad" hidden>
+  <p>هذا الرابط لا يحمل رمز دعوة صالحاً. اطلب من صاحب الختمة أن يرسل الدعوة مرة أخرى.</p>
+</section>
+
+<p class="meta">لا تظهر نيّة الختمة ولا أسماء أعضائها في هذا الرابط. <a href="../privacy/">سياسة الخصوصية</a></p>
+</main>
+<script>
+  // الرمز من عشرة أحرف بأبجدية الخادم (بلا O وI وL و0 و1)؛ يُعرض فقط ولا يُرسل لأي جهة من هذه الصفحة
+  (function () {
+    var raw = (new URLSearchParams(location.search).get("code") || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+    var valid = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{10}$/.test(raw);
+    document.getElementById(valid ? "ok" : "bad").hidden = false;
+    if (!valid) return;
+    document.getElementById("code").textContent = raw;
+    document.getElementById("open").href = "sanad://open/khatma/join?code=" + raw;
+    document.getElementById("copy").addEventListener("click", function () {
+      var done = function () { document.getElementById("copied").textContent = "نُسخ الرمز."; };
+      if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, function () {});
+    });
+  })();
+</script>
+</body>
+</html>

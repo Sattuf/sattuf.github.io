@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سند — رفيقك اليومي للأذكار والرقية الشرعية</title>
+<meta name="description" content="سند: وِرد يومي، رقية تقرؤها بنفسك، عدّاد للذكر ومواقيت للصلاة. مجاني بلا إعلانات على أندرويد وآيفون.">
+<meta name="theme-color" content="#F5EAD8">
+<!--
+  ════════ محتوى يُراجَع قبل النشر ════════
+  ابحث عن «TODO» في هذا الملف. القيم التالية مؤقتة لأنها لم تُعطَ:
+  1) رابط App Store (رابط Google Play مأخوذ من docs/adr/0019).
+  2) أرقام الشريط: التحميلات، التقييم، عدد الدول.
+  3) أرقام الإصدارات ووسوم المنصة في الأخبار (العناوين والتواريخ من سجل المستودع).
+  4) اسم المنشئ بالعربية، نبذته، رسالته، صورته، وحساباته.
+  5) مزايا كل منصة في بطاقتي أندرويد وآيفون.
+-->
+<script>
+/* يُنفَّذ قبل الرسم: اللغة المحفوظة + إخفاء مؤقت لعناصر الافتتاح (يُرفع تلقائياً إن تأخّر GSAP) */
+(function () {
+  var r = document.documentElement, lang = 'ar';
+  try { lang = localStorage.getItem('site-lang') || 'ar'; } catch (e) {}
+  if (lang === 'en') { r.lang = 'en'; r.dir = 'ltr'; }
+  if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    r.classList.add('pre');
+    setTimeout(function () { r.classList.remove('pre'); }, 3500);
+  }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Inter:wght@400;500;600&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* هوية سند كما في التطبيق: ورق، طين، ذهب الفجر، ليل */
+  --cream: #F5EAD8;
+  --card: #F9F4ED;
+  --olive: #9E5324;
+  --olive-dark: #0E1E24;
+  --copper: #9E5324;
+  --copper-ink: #FFF9F2;
+  --gold: #F2C675;
+  --text: #474238;
+  --rule: rgba(32, 30, 29, .14);
+  --shadow: 0 1px 2px rgba(32, 30, 29, .04), 0 18px 40px -28px rgba(32, 30, 29, .28);
+  --r: 28px;
+  --font-head: "Amiri", "Traditional Arabic", serif;
+  --font-body: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --gutter: clamp(20px, 5vw, 64px);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+html[lang="en"] {
+  --font-head: "Fraunces", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--cream); color: var(--text);
+  font: 400 1.0625rem/1.9 var(--font-body);
+  overflow-x: hidden; transition: opacity .22s ease;
+}
+html[lang="en"] body { line-height: 1.7; }
+html.lang-out body { opacity: 0; }
+/* ملمس ورقي خفيف */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .18 0 0 0 0 .22 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+main, .nav, footer { position: relative; z-index: 1; }
+main { overflow-x: clip; }
+h1, h2, h3 { font-family: var(--font-head); color: var(--olive-dark); margin: 0; font-weight: 700; line-height: 1.45; }
+html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3 { font-weight: 600; letter-spacing: -.02em; line-height: 1.12; }
+p { margin: 0; }
+a { color: inherit; }
+ul { list-style: none; margin: 0; padding: 0; }
+:focus-visible { outline: 3px solid var(--olive); outline-offset: 3px; border-radius: 8px; }
+.cta :focus-visible, footer :focus-visible { outline-color: var(--cream); }
+.wrap { width: min(1160px, 100% - 2 * var(--gutter)); margin-inline: auto; }
+.skip { position: absolute; inset-inline-start: 12px; top: -60px; z-index: 100; background: var(--olive-dark); color: var(--cream); padding: 8px 16px; border-radius: 12px; transition: top .2s; }
+.skip:focus { top: 12px; }
+section { padding-block: clamp(80px, 13vw, 168px); }
+.eyebrow { font-size: .875rem; font-weight: 600; color: var(--olive); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+html[lang="en"] .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; }
+.h2 { font-size: clamp(1.9rem, 4.6vw, 3.4rem); max-width: 18ch; }
+.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); max-width: 52ch; margin-top: 18px; }
+.head { margin-bottom: clamp(40px, 6vw, 72px); }
+.flip { display: inline-block; }
+[dir="rtl"] .flip { transform: scaleX(-1); }
+
+/* ───── الأزرار ───── */
+.btn {
+  display: inline-flex; align-items: center; gap: 12px; min-height: 56px; padding: 10px 24px;
+  background: var(--copper); color: var(--copper-ink); border: 0; border-radius: 999px;
+  font: 600 1rem/1.3 var(--font-body); text-decoration: none; cursor: pointer; text-align: start;
+  box-shadow: 0 10px 24px -16px rgba(120, 50, 15, .7);
+  transition: translate .25s var(--ease), box-shadow .25s var(--ease), filter .25s;
+}
+.btn:hover { translate: 0 -2px; filter: brightness(1.06); box-shadow: 0 16px 28px -16px rgba(120, 50, 15, .8); }
+.btn:active { translate: 0 0; }
+.btn svg { width: 22px; height: 22px; flex: none; }
+.btn small { display: block; font-weight: 500; font-size: .75rem; opacity: .85; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* ───── الشريط العلوي ───── */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background-color .35s ease, box-shadow .35s ease; }
+.nav.is-scrolled { background: rgba(245, 234, 216, .94); box-shadow: 0 1px 0 var(--rule); }
+.nav-in { display: flex; align-items: center; gap: 28px; height: 68px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--olive-dark); font: 700 1.3rem/1 var(--font-head); }
+.logo svg { width: 34px; height: 26px; }
+.back { display: inline-grid; place-items: center; width: 40px; height: 40px; margin-inline-end: -12px; border-radius: 50%; color: var(--olive-dark); transition: background-color .25s; }
+.back:hover { background: rgba(32, 30, 29, .08); }
+.back svg { width: 20px; height: 20px; }
+.nav-links { display: none; gap: 26px; margin-inline-start: auto; }
+.nav-links a { text-decoration: none; font-size: .95rem; font-weight: 500; color: var(--olive-dark); padding: 6px 2px; background: linear-gradient(currentColor, currentColor) no-repeat 50% 100% / 0 1px; transition: background-size .3s var(--ease); }
+.nav-links a:hover { background-size: 100% 1px; }
+.lang { margin-inline-start: auto; min-height: 40px; padding: 6px 16px; border: 1px solid var(--olive-dark); background: transparent; color: var(--olive-dark); border-radius: 999px; font: 600 .875rem/1 var(--font-body); cursor: pointer; transition: background-color .25s, color .25s; }
+.lang:hover { background: var(--olive-dark); color: var(--cream); }
+@media (min-width: 900px) { .nav-links { display: flex; } .lang { margin-inline-start: 0; } }
+
+/* ───── مجسّم الهاتف ───── */
+.phone {
+  position: relative; width: min(270px, 68vw); aspect-ratio: 9 / 18.6; margin-inline: auto;
+  background: #0E1E24; border-radius: 13.5% / 6.6%; padding: 3.2%;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .06) inset, 0 40px 70px -40px rgba(32, 30, 29, .55);
+  container-type: inline-size; will-change: transform;
+}
+.phone::after { content: ""; position: absolute; top: 3.4%; left: 50%; width: 26%; height: 2.6%; translate: -50% 0; background: #0E1E24; border-radius: 99px; }
+.screen { height: 100%; border-radius: 11.5% / 5.6%; background: var(--card); overflow: hidden; font: 400 4.9cqw/1.6 "IBM Plex Sans Arabic", Tahoma, sans-serif; color: #201E1D; padding: 15% 6% 0; display: flex; flex-direction: column; gap: 1em; text-align: right; }
+.screen b, .screen strong { font-family: "Amiri", serif; }
+.s-date { font-size: .78em; opacity: .7; }
+.s-title { font-size: 1.75em; font-weight: 700; line-height: 1.3; display: block; }
+.s-card { background: #EBDDC5; border-radius: 1.3em; padding: 1em; display: flex; align-items: center; gap: .9em; }
+.s-ring { width: 3.6em; height: 3.6em; flex: none; border-radius: 50%; background: conic-gradient(var(--olive) 38%, #E0D2B8 0); display: grid; place-items: center; }
+.s-ring i { width: 2.7em; height: 2.7em; border-radius: 50%; background: #EBDDC5; display: grid; place-items: center; font-style: normal; font-size: .8em; font-weight: 600; }
+.s-card small, .s-row small { display: block; font-size: .74em; opacity: .7; }
+.s-row { display: flex; align-items: center; gap: .8em; background: #fff; border: 1px solid rgba(32, 30, 29, .1); border-radius: 1.1em; padding: .75em .9em; font-weight: 500; }
+.s-row > span:nth-child(2) { flex: 1; }
+.s-check { width: 1.5em; height: 1.5em; border-radius: 50%; border: .12em solid #CDBFA6; flex: none; }
+.s-check.on { background: var(--olive); border-color: var(--olive); box-shadow: inset 0 0 0 .22em var(--olive), inset 0 0 0 .5em #fff; }
+.s-pill { font-size: .74em; background: #EBDDC5; border-radius: 99px; padding: .25em .9em; }
+.s-tabs { margin-top: auto; display: flex; justify-content: space-around; padding: .9em 0 1.2em; border-top: 1px solid rgba(32, 30, 29, .1); }
+.s-tabs i { width: 1.5em; height: 1.5em; border-radius: .5em; background: #E3D6BF; }
+.s-tabs i.on { background: var(--olive); }
+.s-door { border-radius: 1.3em; padding: 1.1em 1em; background: #EBDDC5; }
+.s-door.dark { background: var(--olive-dark); color: var(--cream); }
+.s-door b { display: block; font-size: 1.05em; }
+.s-door small { font-size: .74em; opacity: .75; }
+.s-lines { display: grid; gap: .7em; padding: 1.2em 1em; border: 1px solid rgba(32, 30, 29, .16); border-radius: 1.3em; outline: 1px solid rgba(32, 30, 29, .08); outline-offset: .25em; margin: .2em; }
+.s-lines i { height: .55em; border-radius: 99px; background: #E3D6BF; }
+.s-lines i:nth-child(2) { width: 86%; } .s-lines i:nth-child(4) { width: 62%; } .s-lines i:nth-child(5) { width: 74%; }
+.s-count { align-self: center; width: 7.4em; height: 7.4em; border-radius: 50%; border: .3em solid var(--olive); display: grid; place-items: center; text-align: center; line-height: 1.2; margin-block: auto; }
+.s-count b { font-size: 2.1em; display: block; }
+.s-audio { display: flex; align-items: center; gap: .7em; }
+.s-audio i:first-child { width: 2em; height: 2em; border-radius: 50%; background: var(--olive); flex: none; }
+.s-audio i:last-child { flex: 1; height: .3em; border-radius: 9px; background: linear-gradient(to left, var(--olive) 35%, #E3D6BF 0); }
+.screen.night { background: var(--olive-dark); color: var(--cream); align-items: center; text-align: center; }
+.s-breath { width: 11em; height: 11em; border-radius: 50%; margin-block: 1.6em 1em; background: radial-gradient(circle, rgba(245, 234, 216, .95) 0 22%, rgba(245, 234, 216, .28) 23% 46%, rgba(245, 234, 216, .13) 47% 70%, rgba(245, 234, 216, .06) 71%); }
+.night .s-pill { background: rgba(245, 234, 216, .14); }
+
+/* ───── الواجهة الافتتاحية ───── */
+.hero { padding-block: clamp(120px, 17vh, 190px) 0; text-align: center; overflow: hidden; }
+.hero h1 { font-size: clamp(3rem, 11.5vw, 8.2rem); line-height: 1.32; }
+html[lang="en"] .hero h1 { line-height: 1.02; font-weight: 400; }
+.line { display: block; overflow: hidden; padding-block: .14em; }
+.line-in { display: block; will-change: transform; }
+.hero-sub { font-size: clamp(1.1rem, 2vw, 1.4rem); max-width: 40ch; margin: 26px auto 0; }
+.hero .btn-row { justify-content: center; margin-top: 36px; }
+.hero-phone { margin-top: clamp(56px, 8vw, 96px); margin-bottom: -90px; }
+.hero-phone .phone { width: min(320px, 74vw); }
+.pre .line-in, .pre .hero-sub, .pre .hero .btn, .pre .hero-phone { opacity: 0; }
+
+/* ───── مشهد التمرير ───── */
+.scene { padding-block: clamp(80px, 13vw, 150px) 0; background: var(--card); border-block: 1px solid var(--rule); }
+.scene-steps { display: grid; gap: 88px; padding-bottom: clamp(80px, 13vw, 150px); }
+.step { display: grid; gap: 36px; justify-items: center; text-align: center; }
+.step-text { max-width: 30ch; }
+.step-text h3 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); }
+.step-text p { margin-top: 14px; }
+.step-num { display: none; font: 400 clamp(6rem, 13vw, 11rem)/1 var(--font-head); color: var(--olive); opacity: .22; }
+@media (min-width: 900px) {
+  .scene { padding-block: 0; }
+  .scene .head { position: absolute; inset: 96px 0 auto; margin: 0 auto; }
+  .scene-pin { position: relative; height: 100vh; min-height: 620px; display: grid; align-items: center; }
+  .scene-steps { padding: 56px 0 0; gap: 0; }
+  .step { grid-area: 1 / 1; grid-template-columns: 1fr auto 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; text-align: start; justify-items: stretch; }
+  .step .phone { height: min(64vh, 560px); width: auto; }
+  .step-num { display: block; text-align: end; }
+  .step-text { justify-self: end; }
+  /* دون تثبيت (تقليل الحركة أو تعذّر GSAP): لقطات متتالية عادية */
+  .no-pin .scene-pin { height: auto; padding-block: 200px 120px; }
+  .no-pin .step { grid-area: auto; }
+  .no-pin .scene-steps { gap: 110px; }
+}
+
+/* ───── طريقة الاستخدام ───── */
+.howto { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; counter-reset: how; }
+.howto li { counter-increment: how; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 28px; box-shadow: var(--shadow); display: grid; gap: 8px; align-content: start; transition: translate .35s var(--ease), box-shadow .35s var(--ease); }
+.howto li:hover { translate: 0 -4px; box-shadow: 0 1px 2px rgba(32, 30, 29, .05), 0 30px 50px -30px rgba(32, 30, 29, .38); }
+.howto li::before { content: counter(how, arabic-indic); font: 700 2.6rem/1.2 var(--font-head); color: var(--olive); margin-bottom: 12px; }
+html[lang="en"] .howto li::before { content: counter(how); font-weight: 400; }
+.howto h3 { font-size: 1.25rem; }
+.tip { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; max-width: 60ch; }
+.tip b { font-family: var(--font-head); color: var(--cream); background: var(--olive); border-radius: 999px; padding: 0 12px; font-size: .85rem; }
+@media (min-width: 700px) { .howto { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .howto { grid-template-columns: repeat(4, 1fr); } }
+
+/* ───── بطاقتا المنصتين ───── */
+.duo { display: grid; gap: 22px; }
+.plat { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: clamp(28px, 4vw, 48px); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 22px; transition: translate .35s var(--ease), box-shadow .35s var(--ease); }
+.plat:hover { translate: 0 -4px; box-shadow: 0 1px 2px rgba(32, 30, 29, .05), 0 30px 50px -30px rgba(32, 30, 29, .38); }
+.plat-ic { width: 52px; height: 52px; border-radius: 16px; background: #EBDDC5; color: var(--olive); display: grid; place-items: center; }
+.plat-ic svg { width: 26px; height: 26px; }
+.plat h3 { font-size: 1.7rem; }
+.plat li { padding-block: 13px; border-top: 1px solid var(--rule); display: flex; gap: 12px; }
+.plat li::before { content: ""; flex: none; width: 7px; height: 7px; margin-top: .75em; border-radius: 50%; background: var(--olive); }
+.plat .btn { align-self: flex-start; margin-top: auto; }
+@media (min-width: 800px) { .duo { grid-template-columns: 1fr 1fr; } .plat:nth-child(2) { margin-top: 56px; } }
+
+/* ───── شبكة المزايا ───── */
+.bento { display: grid; gap: 18px; grid-template-columns: 1fr; }
+.card { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: clamp(24px, 3vw, 36px); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; min-height: 210px; transition: translate .35s var(--ease), box-shadow .35s var(--ease), border-color .35s; }
+.card:hover { translate: 0 -4px; border-color: rgba(158, 83, 36, .4); box-shadow: 0 1px 2px rgba(32, 30, 29, .05), 0 30px 50px -30px rgba(32, 30, 29, .38); }
+.card h3 { font-size: 1.3rem; }
+.card-ic { width: 44px; height: 44px; color: var(--olive); margin-bottom: auto; }
+.card-ic svg { width: 100%; height: 100%; }
+.card.big h3 { font-size: clamp(1.6rem, 3vw, 2.3rem); max-width: 14ch; }
+.card.big p { max-width: 38ch; }
+.card.dark { background: var(--olive-dark); border-color: transparent; color: #E2E6E4; }
+.card.dark h3, .card.dark .card-ic { color: var(--cream); }
+.times { display: flex; gap: 8px; margin-bottom: auto; flex-wrap: wrap; }
+.times span { flex: 1; min-width: 54px; text-align: center; border: 1px solid var(--rule); border-radius: 16px; padding: 10px 4px; font-size: .8rem; line-height: 1.5; }
+.times span.on { background: var(--olive); color: var(--cream); border-color: var(--olive); }
+.times b { display: block; font-size: 1rem; font-family: var(--font-body); }
+.beads { display: flex; gap: 10px; margin-bottom: auto; flex-wrap: wrap; }
+.beads i { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--olive); }
+.beads i.on { background: var(--olive); }
+@media (min-width: 640px) { .bento { grid-template-columns: repeat(2, 1fr); } .card.big { grid-column: span 2; min-height: 300px; } }
+@media (min-width: 1000px) {
+  .bento { grid-template-columns: repeat(6, 1fr); grid-auto-rows: minmax(220px, auto); }
+  .card { grid-column: span 2; }
+  .card.big { grid-column: span 4; grid-row: span 2; }
+  .card.wide { grid-column: span 3; }
+}
+
+/* ───── الأخبار ───── */
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 44px; }
+.chip { min-height: 42px; padding: 6px 20px; border-radius: 999px; border: 1px solid var(--rule); background: transparent; color: var(--olive-dark); font: 500 .95rem/1 var(--font-body); cursor: pointer; transition: background-color .25s, color .25s, border-color .25s; }
+.chip:hover { border-color: var(--olive-dark); }
+.chip[aria-pressed="true"] { background: var(--olive-dark); color: var(--cream); border-color: var(--olive-dark); }
+.timeline { position: relative; padding-inline-start: 34px; }
+.tl-rail, .tl-line { position: absolute; inset-block: 8px; inset-inline-start: 5px; width: 2px; border-radius: 2px; }
+.tl-rail { background: var(--rule); }
+.tl-line { background: var(--olive); transform-origin: 50% 0; }
+.entry { position: relative; display: grid; gap: 10px; padding-bottom: 52px; }
+.entry:last-child { padding-bottom: 0; }
+.entry[hidden] { display: none; }
+.entry::before { content: ""; position: absolute; inset-inline-start: -34px; top: .55em; width: 12px; height: 12px; border-radius: 50%; background: var(--cream); border: 2px solid var(--olive); }
+.entry-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: .875rem; }
+.ver { font: 600 .8rem/1 ui-monospace, "SF Mono", Menlo, monospace; background: var(--olive-dark); color: var(--cream); padding: 6px 10px; border-radius: 8px; direction: ltr; }
+.tag { border: 1px solid var(--olive); color: var(--olive-dark); border-radius: 999px; padding: 1px 12px; font-size: .8rem; }
+time small { display: block; font-size: .8rem; opacity: .8; }
+.entry h3 { font-size: 1.35rem; }
+.entry p { max-width: 58ch; }
+@media (min-width: 800px) {
+  .timeline { padding-inline-start: 0; }
+  .tl-rail, .tl-line { inset-inline-start: 245px; }
+  .entry { grid-template-columns: 210px 1fr; gap: 70px; }
+  .entry::before { inset-inline-start: 240px; }
+  .entry-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* ───── المنشئ ───── */
+.creator { background: var(--card); border-block: 1px solid var(--rule); }
+.letter { display: grid; gap: 40px; }
+.avatar { width: 132px; height: 132px; border-radius: 50%; background: var(--olive); color: var(--cream); display: grid; place-items: center; box-shadow: 0 0 0 6px var(--card), 0 0 0 7px var(--rule); }
+.avatar svg { width: 62px; }
+.who b { display: block; font: 700 1.2rem/1.5 var(--font-head); color: var(--olive-dark); margin-top: 20px; }
+.who p { font-size: .95rem; max-width: 30ch; margin-top: 6px; }
+.letter-body p { font-size: clamp(1.15rem, 1.9vw, 1.5rem); line-height: 2; color: var(--olive-dark); max-width: 34em; }
+html[lang="en"] .letter-body p { line-height: 1.65; font-family: var(--font-head); font-weight: 400; }
+.letter-body p + p { margin-top: 1.1em; }
+.sign { margin-top: 36px; font: 500 2rem/1.4 var(--font-head); color: var(--olive); display: inline-block; rotate: -3deg; }
+html[lang="en"] .sign { font-style: italic; font-weight: 400; }
+.social { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.social a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 18px; border: 1px solid var(--rule); border-radius: 999px; text-decoration: none; font-size: .95rem; font-weight: 500; color: var(--olive-dark); transition: background-color .25s, color .25s; }
+.social a:hover { background: var(--olive-dark); color: var(--cream); }
+.social svg { width: 18px; height: 18px; }
+@media (min-width: 860px) { .letter { grid-template-columns: 260px 1fr; gap: 72px; } }
+
+/* ───── الأرقام ───── */
+.stats { padding-block: clamp(64px, 9vw, 110px); }
+.stats-in { display: grid; gap: 36px; text-align: center; }
+.stat b { display: block; font: 700 clamp(3rem, 8vw, 5.6rem)/1.25 var(--font-head); color: var(--olive-dark); font-variant-numeric: tabular-nums; }
+html[lang="en"] .stat b { font-weight: 400; }
+.stat span { font-size: 1rem; color: var(--olive); font-weight: 500; }
+@media (min-width: 700px) { .stats-in { grid-template-columns: repeat(3, 1fr); } .stat + .stat { border-inline-start: 1px solid var(--rule); } }
+
+/* ───── الدعوة الأخيرة والتذييل ───── */
+.cta { position: relative; text-align: center; color: var(--cream); padding-block: clamp(110px, 18vw, 220px); }
+.cta-bg { position: absolute; inset: 0; background: var(--olive-dark); }
+.cta-in { position: relative; }
+.cta h2 { color: var(--cream); font-size: clamp(2.3rem, 7vw, 5.4rem); max-width: 14ch; margin-inline: auto; }
+.cta p { margin: 22px auto 0; max-width: 40ch; color: #D5DCDC; font-size: 1.15rem; }
+.cta .btn-row { justify-content: center; margin-top: 40px; }
+.cta .btn { background: var(--gold); color: var(--olive-dark); box-shadow: none; }
+.card.dark h3 { color: var(--gold); }
+footer { background: var(--olive-dark); color: #B9C4C6; border-top: 1px solid rgba(245, 234, 216, .14); padding-block: 30px; font-size: .9rem; }
+.foot { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; }
+.foot nav { display: flex; gap: 22px; flex-wrap: wrap; }
+.foot a { text-underline-offset: 4px; text-decoration-color: rgba(245, 234, 216, .4); transition: text-decoration-color .25s; }
+.foot a:hover { text-decoration-color: var(--cream); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">تخطَّ إلى المحتوى</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="back" href="../" data-i18n-label="backLabel" aria-label="العودة إلى صفحتي ومشاريعي الأخرى"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
+    <a class="logo" href="#top" data-i18n-label="logoLabel" aria-label="سند — أعلى الصفحة">
+      <svg viewBox="90 128 336 252" aria-hidden="true"><path d="M398 156V222Q398 252 370 252Q342 252 342 222V190V222Q342 252 314 252Q286 252 286 222V190V236C286 320 252 352 202 352C150 352 118 322 118 288" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/><path d="M118 292V259" fill="none" stroke="currentColor" stroke-width="40"/><path d="M98 260L138 260L190 182Z" fill="currentColor"/><circle cx="202" cy="260" r="26" fill="currentColor"/></svg>
+      <span data-i18n="brand">سند</span>
+    </a>
+    <nav class="nav-links" data-i18n-label="navLabel" aria-label="أقسام الصفحة">
+      <a href="#tour" data-i18n="navTour">جولة</a>
+      <a href="#howto" data-i18n="navHowto">طريقة الاستخدام</a>
+      <a href="#platforms" data-i18n="navPlatforms">المنصات</a>
+      <a href="#features" data-i18n="navFeatures">المزايا</a>
+      <a href="#news" data-i18n="navNews">الأخبار</a>
+    </nav>
+    <button class="lang" id="lang" type="button" lang="en" aria-label="Switch to English">English</button>
+  </div>
+</header>
+
+<main id="main">
+<!-- 2 ─ الواجهة الافتتاحية -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <h1>
+      <span class="line"><span class="line-in" data-i18n="heroL1">وِردُك اليومي،</span></span>
+      <span class="line"><span class="line-in" data-i18n="heroL2">على مهلك.</span></span>
+    </h1>
+    <p class="hero-sub" data-i18n="heroSub">سند رفيقك اليومي للأذكار والرقية الشرعية؛ تقرأ بنفسك، وتسمع متى شئت. مجاني بلا إعلانات.</p>
+    <div class="btn-row">
+      <a class="btn" href="https://play.google.com/store/apps/details?id=app.sanad" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3.3v17.4c0 .8.9 1.3 1.6.9l14.3-8.7c.7-.4.7-1.4 0-1.8L6.6 2.4C5.9 2 5 2.5 5 3.3z"/></svg>
+        <span><small data-i18n="getOn">حمّله من</small><span data-i18n="gplay">Google Play</span></span>
+      </a>
+      <!-- TODO: رابط App Store الحقيقي -->
+      <a class="btn" href="https://apps.apple.com/app/id0000000000" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.800-.9-3-.8c-1.500 0-3 .9-3.800 2.300-1.600 2.800-.4 7 1.200 9.300.800 1.100 1.700 2.400 2.900 2.300 1.200 0 1.600-.7 3-.7s1.800.7 3 .7 2-1.100 2.800-2.200c.900-1.300 1.200-2.500 1.300-2.600-.100 0-2.500-1-2.500-3.900zM14.400 5.800c.600-.800 1.100-1.900.900-3-.900 0-2.100.6-2.700 1.400-.600.700-1.100 1.800-1 2.800 1.100.1 2.100-.5 2.800-1.200z"/></svg>
+        <span><small data-i18n="getOn">حمّله من</small><span data-i18n="appstore">App Store</span></span>
+      </a>
+    </div>
+    <div class="hero-phone">
+      <div class="phone" role="img" data-i18n-label="altHub" aria-label="شاشة سند الرئيسية: ثلاثة أبواب، الآيات والأذكار، ارقِ نفسك، والمكتبة الصوتية">
+        <div class="screen" dir="rtl" lang="ar" aria-hidden="true">
+          <span class="s-date">الخميس · العصر بعد ٤٢ دقيقة</span>
+          <b class="s-title">السلام عليكم</b>
+          <div class="s-door dark"><b>ارقِ نفسك</b><small>اقرأ أو استمع، بالعدّاد</small></div>
+          <div class="s-door"><b>الآيات والأذكار</b><small>ورد الصباح والمساء</small></div>
+          <div class="s-door"><b>المكتبة الصوتية</b><small>تلاوات تسمعها متى شئت</small></div>
+          <div class="s-tabs"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 ─ مشهد التمرير -->
+<section class="scene" id="tour">
+  <div class="scene-pin">
+    <div class="wrap head">
+      <p class="eyebrow" data-i18n="tourEyebrow">جولة في التطبيق</p>
+    </div>
+    <div class="wrap scene-steps">
+      <article class="step">
+        <div class="step-text">
+          <h3 data-i18n="s1Title">يومك مرتّب قبل أن تفتحه</h3>
+          <p data-i18n="s1Body">أذكار الصباح في الصباح وأذكار المساء في المساء. تفتح التطبيق فتجد ما حان وقته، وتعلّم على ما قرأت.</p>
+        </div>
+        <div class="phone" role="img" data-i18n-label="altToday" aria-label="شاشة «يومي»: تقدّم البرنامج وقائمة أذكار الصباح">
+          <div class="screen" dir="rtl" lang="ar" aria-hidden="true">
+            <span class="s-date">الخميس</span>
+            <b class="s-title">صباح الخير</b>
+            <div class="s-card"><div class="s-ring"><i>٣/٧</i></div><div><b>أساس التحصين</b><small>اليوم ٣ من ٧</small></div></div>
+            <div class="s-row"><i class="s-check on"></i><span>ذكر الحفظ<small>٣ مرات</small></span><span class="s-pill">اقرأ</span></div>
+            <div class="s-row"><i class="s-check"></i><span>سيّد الاستغفار</span><span class="s-pill">اقرأ</span></div>
+            <div class="s-row"><i class="s-check"></i><span>المعوّذات<small>٣ مرات</small></span><span class="s-pill">اقرأ</span></div>
+            <div class="s-tabs"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <span class="step-num" aria-hidden="true" data-i18n="n1">١</span>
+      </article>
+      <article class="step">
+        <div class="step-text">
+          <h3 data-i18n="s2Title">اقرأ، والعدّاد يحفظ عنك</h3>
+          <p data-i18n="s2Body">النص أمامك بخط واضح ومعه التلاوة. المس الشاشة مع كل مرة، ودَع العدّ على سند.</p>
+        </div>
+        <div class="phone" role="img" data-i18n-label="altReader" aria-label="شاشة القراءة: نص الورد مع عدّاد التكرار ومشغّل التلاوة">
+          <div class="screen" dir="rtl" lang="ar" aria-hidden="true">
+            <span class="s-date">ورد الصباح · ٢ من ٨</span>
+            <div class="s-lines"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="s-count"><span><b>٢</b>من ٣</span></div>
+            <div class="s-audio"><i></i><i></i></div>
+            <div class="s-tabs"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+          </div>
+        </div>
+        <span class="step-num" aria-hidden="true" data-i18n="n2">٢</span>
+      </article>
+      <article class="step">
+        <div class="step-text">
+          <h3 data-i18n="s3Title">سكينة بلمسة واحدة</h3>
+          <p data-i18n="s3Body">حين يضيق صدرك أو يطول ليلك، زرّ واحد يأخذك إلى ذكر هادئ وتنفّس على مهل. لا قوائم ولا اختيارات.</p>
+        </div>
+        <div class="phone" role="img" data-i18n-label="altSakina" aria-label="شاشة «السكينة»: دائرة تنفّس هادئة على خلفية داكنة">
+          <div class="screen night" dir="rtl" lang="ar" aria-hidden="true">
+            <span class="s-date">سكينة</span>
+            <div class="s-breath"></div>
+            <b class="s-title" style="font-size:1.3em">تنفّس بهدوء</b>
+            <span class="s-pill">٣ دقائق</span>
+          </div>
+        </div>
+        <span class="step-num" aria-hidden="true" data-i18n="n3">٣</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 3b ─ طريقة الاستخدام -->
+<section id="howto">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow" data-i18n="howEyebrow">طريقة الاستخدام</p>
+      <h2 class="h2" data-i18n="howTitle">من التحميل إلى أول ورد في دقائق</h2>
+    </div>
+    <ol class="howto">
+      <li><h3 data-i18n="h1Title">حمّل التطبيق وافتحه</h3><p data-i18n="h1Body">لا يلزمك حساب لتبدأ. يسألك سند أول مرة عمّا تريد، ثم يأخذك إلى الباب المناسب.</p></li>
+      <li><h3 data-i18n="h2Title">اختر بابك</h3><p data-i18n="h2Body">«ارقِ نفسك» لتقرأ الرقية أو تسمعها، و«الآيات والأذكار» لورد الصباح والمساء، و«المكتبة الصوتية» للاستماع.</p></li>
+      <li><h3 data-i18n="h3Title">ابدأ برنامج الأيام السبعة</h3><p data-i18n="h3Body">من «البرامج» اختر «أساس التحصين». بعدها تجد ورد كل وقت في «يومي» حين يحين.</p></li>
+      <li><h3 data-i18n="h4Title">اقرأ والمس العدّاد</h3><p data-i18n="h4Body">مع كل مرة لمسة، والعدّاد يحفظ عنك. وإن انقطعت يوماً فأكمل من حيث توقفت.</p></li>
+    </ol>
+    <p class="tip"><b data-i18n="tipLabel">نصيحة</b> <span data-i18n="tipBody">زر «سكينة» في أسفل الشاشة حاضر دائماً؛ المسه حين تحتاج إلى هدوء سريع.</span></p>
+  </div>
+</section>
+
+<!-- 4 ─ المنصتان -->
+<section id="platforms">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow" data-i18n="platEyebrow">على هاتفك</p>
+      <h2 class="h2" data-i18n="platTitle">التطبيق نفسه، أياً كان هاتفك</h2>
+    </div>
+    <div class="duo">
+      <!-- TODO: راجع مزايا كل منصة -->
+      <article class="plat">
+        <div class="plat-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3.3v17.4c0 .8.9 1.3 1.6.9l14.3-8.7c.7-.4.7-1.4 0-1.8L6.6 2.400C5.900 2 5 2.500 5 3.300z"/></svg></div>
+        <h3 data-i18n="andTitle">أندرويد</h3>
+        <ul>
+          <li data-i18n="and1">تنبيه الورد ومنبّه الصلاة يصلانك في وقتهما</li>
+          <li data-i18n="and2">دخول بحساب Google بنقرة واحدة، أو بلا حساب</li>
+          <li data-i18n="and3">وضع ليلي يتبع إعداد جهازك</li>
+        </ul>
+        <a class="btn" href="https://play.google.com/store/apps/details?id=app.sanad" rel="noopener"><span data-i18n="andCta">حمّل نسخة أندرويد</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="plat">
+        <div class="plat-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.800-.9-3-.8c-1.500 0-3 .9-3.800 2.300-1.600 2.800-.4 7 1.200 9.300.800 1.100 1.700 2.400 2.900 2.300 1.200 0 1.600-.7 3-.7s1.800.7 3 .7 2-1.100 2.800-2.200c.900-1.300 1.200-2.500 1.300-2.600-.100 0-2.500-1-2.500-3.900zM14.400 5.800c.600-.800 1.100-1.900.900-3-.900 0-2.100.6-2.700 1.400-.600.700-1.100 1.800-1 2.800 1.100.1 2.100-.5 2.800-1.200z"/></svg></div>
+        <h3 data-i18n="iosTitle">آيفون</h3>
+        <ul>
+          <li data-i18n="ios1">الواجهة نفسها والعدّاد نفسه، بلا فرق</li>
+          <li data-i18n="ios2">دخول بحساب Apple، أو بلا حساب</li>
+          <li data-i18n="ios3">مذكّرتك مشفّرة ولا تغادر هاتفك</li>
+        </ul>
+        <a class="btn" href="https://apps.apple.com/app/id0000000000" rel="noopener"><span data-i18n="iosCta">حمّل نسخة آيفون</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ─ شبكة المزايا -->
+<section id="features" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow" data-i18n="featEyebrow">المزايا</p>
+      <h2 class="h2" data-i18n="featTitle">قليلٌ يكفيك، لا كثيرٌ يشغلك</h2>
+    </div>
+    <div class="bento">
+      <article class="card big">
+        <div class="beads" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <h3 data-i18n="f1Title">برنامج قصير تمشي فيه يوماً بيوم</h3>
+        <p data-i18n="f1Body">ابدأ بسبعة أيام. كل يوم ورده حاضر بحسب وقته، وإن انقطعت فأكمل من حيث توقفت، بلا عتاب ولا نقاط.</p>
+      </article>
+      <article class="card">
+        <div class="card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.500C10 5 7 4.500 3.500 5v13c3.500-.500 6.500 0 8.500 1.500 2-1.500 5-2 8.500-1.500V5C17 4.500 14 5 12 6.500zM12 6.500V19.500"/></svg></div>
+        <h3 data-i18n="f2Title">ارقِ نفسك بنفسك</h3>
+        <p data-i18n="f2Body">رقية مكتوبة ومسموعة بمصادرها. لا وسيط ولا رسوم.</p>
+      </article>
+      <article class="card">
+        <div class="card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.500"/><path d="M12 7.500V12l3 2"/></svg></div>
+        <h3 data-i18n="f3Title">عدّاد لا ينسى</h3>
+        <p data-i18n="f3Body">يعدّ معك كل ذكر، ويحفظ مجموعك منذ أول يوم.</p>
+      </article>
+      <article class="card wide">
+        <div class="times" aria-hidden="true"><span><b data-i18n="p1">الفجر</b></span><span><b data-i18n="p2">الظهر</b></span><span class="on"><b data-i18n="p3">العصر</b></span><span><b data-i18n="p4">المغرب</b></span><span><b data-i18n="p5">العشاء</b></span></div>
+        <h3 data-i18n="f4Title">مواقيت الصلاة ومنبّهها</h3>
+        <p data-i18n="f4Body">اختر مدينتك مرة واحدة، وسند ينبّهك عند كل صلاة.</p>
+      </article>
+      <article class="card wide">
+        <div class="card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0116 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.500"/><rect x="17" y="14" width="4" height="6" rx="1.500"/></svg></div>
+        <h3 data-i18n="f5Title">مكتبة صوتية</h3>
+        <p data-i18n="f5Body">تلاوات الرقية والأذكار في مكان واحد، تنزّلها دفعة واحدة وتسمعها متى شئت.</p>
+      </article>
+      <article class="card dark" style="grid-column:1/-1;min-height:0">
+        <div class="card-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.500" stroke-linecap="round" aria-hidden="true"><rect x="5" y="10.500" width="14" height="10" rx="2.500"/><path d="M8 10.500V8a4 4 0 018 0v2.500"/></svg></div>
+        <h3 data-i18n="f6Title">ما تكتبه يبقى لك</h3>
+        <p data-i18n="f6Body">مذكّرتك مشفّرة على جهازك، ومدينتك لا تغادر هاتفك، والتطبيق يعمل بلا حساب.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ─ الأخبار -->
+<section id="news" style="padding-top:0">
+  <div class="wrap">
+    <div class="head" style="margin-bottom:32px">
+      <p class="eyebrow" data-i18n="newsEyebrow">آخر الأخبار</p>
+      <h2 class="h2" data-i18n="newsTitle">ما الجديد في سند</h2>
+    </div>
+    <div class="filters" role="group" data-i18n-label="filterLabel" aria-label="تصفية الأخبار بحسب المنصة">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true" data-i18n="fAll">الكل</button>
+      <button class="chip" type="button" data-filter="android" aria-pressed="false" data-i18n="fAnd">أندرويد</button>
+      <button class="chip" type="button" data-filter="ios" aria-pressed="false" data-i18n="fIos">آيفون</button>
+    </div>
+    <!-- TODO: راجع أرقام الإصدارات ووسوم المنصة -->
+    <div class="timeline" id="timeline">
+      <span class="tl-rail" aria-hidden="true"></span><span class="tl-line" aria-hidden="true"></span>
+      <article class="entry" data-platform="android ios">
+        <div class="entry-meta"><time datetime="2026-11-09">9 نوفمبر 2026</time><span class="ver">v1.3.0</span><span class="tag" data-i18n="tagBoth">أندرويد وآيفون</span></div>
+        <div><h3 data-i18n="n1Title">عدّاد يحفظ مجموعك</h3><p data-i18n="n1Body">صار سند يعدّ كل ذكر منذ أول يوم لك في التطبيق، ولك أن تصفّر العدّ متى شئت.</p></div>
+      </article>
+      <article class="entry" data-platform="android ios">
+        <div class="entry-meta"><time datetime="2026-11-03">3 نوفمبر 2026</time><span class="ver">v1.2.0</span><span class="tag" data-i18n="tagBoth">أندرويد وآيفون</span></div>
+        <div><h3 data-i18n="n2Title">مواقيت الصلاة مع منبّه</h3><p data-i18n="n2Body">أضفنا مواقيت الصلاة بحسب مدينتك، مع منبّه تضبطه لكل صلاة على حدة.</p></div>
+      </article>
+      <article class="entry" data-platform="android ios">
+        <div class="entry-meta"><time datetime="2026-10-31">31 أكتوبر 2026</time><span class="ver">v1.1.0</span><span class="tag" data-i18n="tagBoth">أندرويد وآيفون</span></div>
+        <div><h3 data-i18n="n3Title">تصميم جديد بثلاثة أبواب</h3><p data-i18n="n3Body">رتّبنا التطبيق في ثلاثة أبواب واضحة، وصار الورد يُقرأ بالعدّاد، والاستماع متاح دون تسجيل.</p></div>
+      </article>
+      <article class="entry" data-platform="android">
+        <div class="entry-meta"><time datetime="2026-10-25">25 أكتوبر 2026</time><span class="ver">v1.0.2</span><span class="tag" data-i18n="fAnd">أندرويد</span></div>
+        <div><h3 data-i18n="n4Title">حزمة صوتية بنقرة واحدة</h3><p data-i18n="n4Body">نزّل تلاوات الرقية الأساسية من المكتبة دفعة واحدة بدل تنزيلها ملفاً ملفاً.</p></div>
+      </article>
+      <article class="entry" data-platform="ios">
+        <div class="entry-meta"><time datetime="2026-10-25">25 أكتوبر 2026</time><span class="ver">v1.0.1</span><span class="tag" data-i18n="fIos">آيفون</span></div>
+        <div><h3 data-i18n="n5Title">مدينتك تبقى على جهازك</h3><p data-i18n="n5Body">اختر مدينتك من القائمة أو دَع التطبيق يقترحها عليك؛ وفي الحالين لا يغادر موقعك هاتفك.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ─ المنشئ -->
+<section class="creator" id="creator">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow" data-i18n="crEyebrow">من وراء سند</p>
+      <h2 class="h2" data-i18n="crTitle">رسالة من المنشئ</h2>
+    </div>
+    <!-- TODO: الاسم بالعربية، النبذة، الرسالة، الصورة (استبدل .avatar بـ <img alt="…">)، والحسابات -->
+    <div class="letter">
+      <div class="who">
+        <div class="avatar" role="img" data-i18n-label="altAvatar" aria-label="صورة صطوف محمد خير، منشئ سند"><svg viewBox="90 128 336 252" aria-hidden="true"><path d="M398 156V222Q398 252 370 252Q342 252 342 222V190V222Q342 252 314 252Q286 252 286 222V190V236C286 320 252 352 202 352C150 352 118 322 118 288" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/><path d="M118 292V259" fill="none" stroke="currentColor" stroke-width="40"/><path d="M98 260L138 260L190 182Z" fill="currentColor"/><circle cx="202" cy="260" r="26" fill="currentColor"/></svg></div>
+        <b data-i18n="crName">صطوف محمد خير</b>
+        <p data-i18n="crBio">مطوّر برمجيات يبني سند ويرعاه بنفسه. يرى أن ما يعين على الذكر يُعطى للناس مجاناً وبلا إعلانات.</p>
+      </div>
+      <div class="letter-body">
+        <p data-i18n="l1">بدأتُ سند لحاجة بسيطة: أن أفتح هاتفي فأجد وِردي أمامي، بلا إعلانات، وبلا أحد يطلب مني مالاً ليقرأ عليّ.</p>
+        <p data-i18n="l2">بحثتُ فلم أجد ما أطمئن إليه، فبنيته. كل ذكر في سند معه مصدره، والرقية تقرؤها أنت أو تسمعها، ولا أعدك فيه بشيء؛ فالشفاء بيد الله وحده.</p>
+        <p data-i18n="l3">سند مجاني وسيبقى كذلك. وإن رأيت فيه خطأ أو خطر لك ما يُصلحه فاكتب لي؛ أقرأ كل ما يصلني.</p>
+        <span class="sign" data-i18n="crSign">محمد خير</span>
+        <div class="social">
+          <a href="https://github.com/Sattuf" rel="noopener me"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-3.200 19.500c.500.100.700-.200.700-.500v-1.700c-2.800.600-3.400-1.300-3.400-1.300-.500-1.200-1.100-1.500-1.100-1.500-.900-.600.100-.600.100-.600 1 .100 1.500 1 1.500 1 .900 1.500 2.400 1.100 2.900.800.100-.600.400-1.100.600-1.300-2.200-.300-4.600-1.100-4.600-5 0-1.100.400-2 1-2.700-.100-.300-.400-1.300.100-2.700 0 0 .800-.300 2.700 1a9.400 9.400 0 015 0c1.900-1.300 2.700-1 2.700-1 .500 1.400.200 2.400.100 2.700.600.700 1 1.600 1 2.700 0 3.900-2.400 4.700-4.600 5 .400.300.700.900.700 1.800V21c0 .300.200.600.700.500A10 10 0 0012 2z"/></svg><span data-i18n="soGithub">GitHub</span></a>
+          <a href="../#about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg><span data-i18n="soHome">صفحتي ومشاريعي</span></a>
+          <a href="https://github.com/Sattuf/sanad" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg><span data-i18n="soRepo">شيفرة المشروع</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ─ الأرقام -->
+<!-- TODO: أرقام مؤقتة — ضع الأرقام الحقيقية في data-count -->
+<section class="stats" data-i18n-label="statsLabel" aria-label="سند بالأرقام">
+  <div class="wrap stats-in">
+    <div class="stat"><b data-count="10000" data-suffix="+">+10,000</b><span data-i18n="st1">تحميل</span></div>
+    <div class="stat"><b data-count="4.8" data-dec="1">4.8</b><span data-i18n="st2">تقييم المتجر من ٥</span></div>
+    <div class="stat"><b data-count="24">24</b><span data-i18n="st3">دولة</span></div>
+  </div>
+</section>
+
+<!-- 9 ─ الدعوة الأخيرة -->
+<section class="cta" id="download">
+  <div class="cta-bg" aria-hidden="true"></div>
+  <div class="wrap cta-in">
+    <h2 data-i18n="ctaTitle">ابدأ وِردك الليلة</h2>
+    <p data-i18n="ctaBody">حمّل سند، واختر برنامج الأيام السبعة، واقرأ أول ورد. لن يأخذ منك إلا دقائق.</p>
+    <div class="btn-row">
+      <a class="btn" href="https://play.google.com/store/apps/details?id=app.sanad" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3.300v17.400c0 .800.900 1.300 1.600.900l14.300-8.700c.700-.400.700-1.400 0-1.800L6.600 2.400C5.900 2 5 2.500 5 3.300z"/></svg>
+        <span><small data-i18n="getOn">حمّله من</small><span data-i18n="gplay">Google Play</span></span>
+      </a>
+      <a class="btn" href="https://apps.apple.com/app/id0000000000" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.800-.9-3-.8c-1.500 0-3 .9-3.800 2.300-1.600 2.800-.4 7 1.200 9.300.800 1.100 1.700 2.400 2.900 2.300 1.200 0 1.600-.7 3-.7s1.800.7 3 .7 2-1.100 2.800-2.200c.900-1.300 1.200-2.500 1.300-2.600-.100 0-2.500-1-2.500-3.900zM14.400 5.800c.600-.800 1.100-1.900.900-3-.900 0-2.100.6-2.700 1.400-.600.700-1.100 1.800-1 2.800 1.100.1 2.100-.5 2.800-1.200z"/></svg>
+        <span><small data-i18n="getOn">حمّله من</small><span data-i18n="appstore">App Store</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span data-i18n="footCopy">© ٢٠٢٦ سند. مجاني بلا إعلانات.</span>
+    <nav data-i18n-label="footLabel" aria-label="روابط قانونية">
+      <a href="../privacy/" data-i18n="footPrivacy">سياسة الخصوصية</a>
+      <a href="../terms/" data-i18n="footTerms">شروط الاستخدام</a>
+      <a href="../" data-i18n="footHome">مشاريعي الأخرى</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  /* ═════════ النصوص الإنجليزية (العربية تُقرأ من الصفحة نفسها) ═════════ */
+  var EN = {
+    title: 'Sanad — your daily companion for adhkar and ruqyah',
+    skip: 'Skip to content', logoLabel: 'Sanad — back to top', brand: 'Sanad', navLabel: 'Page sections',
+    backLabel: 'Back to my page and other projects', navHowto: 'How to use', footHome: 'My other projects', soHome: 'About me & projects',
+    howEyebrow: 'How to use', howTitle: 'From download to your first wird in minutes',
+    h1Title: 'Download and open the app', h1Body: 'No account needed to start. On first launch Sanad asks what you are looking for and takes you to the right door.',
+    h2Title: 'Pick your door', h2Body: '“Self-ruqyah” to read or listen to ruqyah, “Verses & adhkar” for the morning and evening wird, and the “Audio library” for listening.',
+    h3Title: 'Start the seven-day programme', h3Body: 'In “Programmes”, choose “Foundations of protection”. From then on, each wird appears in “My day” when its time comes.',
+    h4Title: 'Read, and tap the counter', h4Body: 'One tap per repetition and the counter keeps track. Miss a day? Just pick up where you stopped.',
+    tipLabel: 'Tip', tipBody: 'The “Sakina” button at the bottom of the screen is always there. Tap it whenever you need a moment of calm.',
+    navTour: 'Tour', navPlatforms: 'Platforms', navFeatures: 'Features', navNews: 'News', navCreator: 'Creator',
+    heroL1: 'Your daily wird,', heroL2: 'at your own pace.',
+    heroSub: 'Sanad is a daily companion for adhkar and ruqyah. Read it yourself, or listen whenever you like. Free, with no ads.',
+    getOn: 'Get it on', gplay: 'Google Play', appstore: 'App Store',
+    altHub: 'Sanad home screen with three doors: verses and adhkar, self-ruqyah, and the audio library',
+    tourEyebrow: 'A look inside',
+    s1Title: 'Your day, already laid out',
+    s1Body: 'Morning adhkar in the morning, evening adhkar in the evening. Open the app, see what is due now, and tick off what you have read.',
+    altToday: '“My Day” screen: programme progress and the morning adhkar list',
+    s2Title: 'You read. The counter keeps count.',
+    s2Body: 'The text sits in front of you in clear type, with the recitation alongside. Tap once per repetition and leave the counting to Sanad.',
+    altReader: 'Reading screen: the wird text with a repetition counter and an audio player',
+    s3Title: 'Calm, one tap away',
+    s3Body: 'When your chest feels tight or the night runs long, one button takes you to quiet dhikr and slow breathing. No menus, no choices.',
+    altSakina: '“Sakina” screen: a soft breathing circle on a dark background',
+    n1: '1', n2: '2', n3: '3',
+    platEyebrow: 'On your phone', platTitle: 'The same app, whichever phone you carry',
+    andTitle: 'Android', and1: 'Wird reminders and prayer alarms that arrive on time', and2: 'One-tap Google sign-in, or no account at all', and3: 'Dark mode that follows your device', andCta: 'Get the Android app',
+    iosTitle: 'iPhone', ios1: 'The same interface and the same counter', ios2: 'Sign in with Apple, or no account at all', ios3: 'Your journal is encrypted and never leaves your phone', iosCta: 'Get the iPhone app',
+    featEyebrow: 'Features', featTitle: 'Just enough, and nothing in the way',
+    f1Title: 'A short programme, one day at a time',
+    f1Body: 'Start with seven days. Each day’s wird is ready at the right hour, and if you miss one you simply pick up where you stopped. No guilt, no points.',
+    f2Title: 'Recite ruqyah yourself', f2Body: 'Written and recited ruqyah, with sources. No middleman, no fees.',
+    f3Title: 'A counter that remembers', f3Body: 'It counts every dhikr with you and keeps your total from day one.',
+    p1: 'Fajr', p2: 'Dhuhr', p3: 'Asr', p4: 'Maghrib', p5: 'Isha',
+    f4Title: 'Prayer times, with an alarm', f4Body: 'Pick your city once and Sanad reminds you at every prayer.',
+    f5Title: 'Audio library', f5Body: 'Ruqyah and adhkar recitations in one place. Download the set in one go and listen whenever you like.',
+    f6Title: 'What you write stays yours', f6Body: 'Your journal is encrypted on your device, your city never leaves your phone, and the app works without an account.',
+    newsEyebrow: 'Latest news', newsTitle: 'What’s new in Sanad', filterLabel: 'Filter news by platform',
+    fAll: 'All', fAnd: 'Android', fIos: 'iPhone', tagBoth: 'Android & iPhone',
+    n1Title: 'A counter that keeps your total', n1Body: 'Sanad now counts every dhikr from your first day in the app, and you can reset the count whenever you want.',
+    n2Title: 'Prayer times with an alarm', n2Body: 'Prayer times for your city, with an alarm you can set for each prayer separately.',
+    n3Title: 'A new design with three doors', n3Body: 'The app is now arranged into three clear doors, the wird is read with a counter, and listening needs no sign-up.',
+    n4Title: 'One-tap audio pack', n4Body: 'Download the core ruqyah recitations from the library in one go instead of file by file.',
+    n5Title: 'Your city stays on your device', n5Body: 'Choose your city from the list or let the app suggest it. Either way, your location never leaves your phone.',
+    crEyebrow: 'Behind Sanad', crTitle: 'A note from the creator',
+    altAvatar: 'Portrait of Satouf Mohamad Kheir, creator of Sanad', crName: 'Satouf Mohamad Kheir',
+    crBio: 'A software developer who builds and looks after Sanad himself. He believes anything that helps people remember God should be free and ad-free.',
+    l1: 'I started Sanad out of a simple need: to open my phone and find my wird waiting, with no ads and nobody asking for money to recite over me.',
+    l2: 'I looked and found nothing I could trust, so I built it. Every dhikr in Sanad comes with its source, the ruqyah is yours to read or listen to, and I promise you nothing through it. Healing is in God’s hands alone.',
+    l3: 'Sanad is free and will stay free. If you spot a mistake or think of something that would make it better, write to me. I read everything.',
+    crSign: 'Mohamad Kheir', soGithub: 'GitHub', soRepo: 'Source code',
+    statsLabel: 'Sanad in numbers', st1: 'downloads', st2: 'store rating out of 5', st3: 'countries',
+    ctaTitle: 'Begin your wird tonight', ctaBody: 'Download Sanad, pick the seven-day programme, and read your first wird. It only takes a few minutes.',
+    footCopy: '© 2026 Sanad. Free, with no ads.', footLabel: 'Legal links', footPrivacy: 'Privacy policy', footTerms: 'Terms of use'
+  };
+  var AR = { title: document.title };
+  var textEls = $$('[data-i18n]'), labelEls = $$('[data-i18n-label]');
+  textEls.forEach(function (el) { AR[el.dataset.i18n] = el.textContent; });
+  labelEls.forEach(function (el) { AR[el.dataset.i18nLabel] = el.getAttribute('aria-label'); });
+
+  var lang = root.lang === 'en' ? 'en' : 'ar';
+  var langBtn = document.getElementById('lang');
+  var isRTL = function () { return lang === 'ar'; };
+
+  /* ═════════ أرقام وتواريخ بحسب اللغة ═════════ */
+  var counters = $$('[data-count]').map(function (el) {
+    return { el: el, target: parseFloat(el.dataset.count), dec: +(el.dataset.dec || 0), suffix: el.dataset.suffix || '', v: parseFloat(el.dataset.count) };
+  });
+  function renderCount(c) {
+    var n = new Intl.NumberFormat(isRTL() ? 'ar-EG' : 'en-US', { minimumFractionDigits: c.dec, maximumFractionDigits: c.dec }).format(c.v);
+    c.el.textContent = isRTL() ? c.suffix + n : n + c.suffix;
+  }
+  function renderDates() {
+    $$('time[datetime]').forEach(function (t) {
+      var d = new Date(t.dateTime + 'T12:00:00Z'), o = { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' };
+      try {
+        var g = new Intl.DateTimeFormat(isRTL() ? 'ar-EG' : 'en-GB', o).format(d);
+        t.textContent = isRTL() ? new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura-nu-arab', o).format(d) : g;
+        if (isRTL()) { var sm = document.createElement('small'); sm.textContent = g; t.appendChild(sm); }
+      } catch (e) {}
+    });
+  }
+
+  function applyLang() {
+    var dict = lang === 'en' ? EN : AR;
+    root.lang = lang; root.dir = isRTL() ? 'rtl' : 'ltr';
+    document.title = dict.title;
+    textEls.forEach(function (el) { var v = dict[el.dataset.i18n]; if (v != null) el.textContent = v; });
+    labelEls.forEach(function (el) { var v = dict[el.dataset.i18nLabel]; if (v != null) el.setAttribute('aria-label', v); });
+    langBtn.textContent = isRTL() ? 'English' : 'العربية';
+    langBtn.lang = isRTL() ? 'en' : 'ar';
+    langBtn.setAttribute('aria-label', isRTL() ? 'Switch to English' : 'التبديل إلى العربية');
+    counters.forEach(renderCount);
+    renderDates();
+  }
+
+  /* ═════════ الشريط العلوي ═════════ */
+  var nav = document.getElementById('nav');
+  function onScroll() { nav.classList.toggle('is-scrolled', window.scrollY > 24); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ═════════ تصفية الأخبار ═════════ */
+  var entries = $$('.entry'), chips = $$('.chip');
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var f = chip.dataset.filter;
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
+      entries.forEach(function (e) { e.hidden = !(f === 'all' || e.dataset.platform.split(' ').indexOf(f) > -1); });
+      if (hasGsap) {
+        gsap.killTweensOf(entries);
+        gsap.set(entries, { clearProps: 'all' });
+        ScrollTrigger.refresh();
+      }
+    });
+  });
+
+  /* ═════════ الحركة: GSAP + ScrollTrigger ═════════ */
+  var hasGsap = !!(window.gsap && window.ScrollTrigger);
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var mm = null, counted = false;
+
+  function killMotion() {
+    if (mm) { mm.revert(); mm = null; }
+    if (counted) counters.forEach(function (c) { c.v = c.target; }); /* العدّ لا يتكرر */
+  }
+  function buildMotion() {
+    killMotion();
+    root.classList.toggle('no-pin', !hasGsap || reduce.matches);
+    if (!hasGsap) return;
+    mm = gsap.matchMedia();
+    mm.add({ desk: '(min-width: 900px)', motion: '(prefers-reduced-motion: no-preference)' }, function (ctx) {
+      if (!ctx.conditions.motion) return;
+      var sx = isRTL() ? 1 : -1; /* اتجاه الحركات الأفقية يتبع اتجاه الصفحة */
+
+      /* مشهد الهاتف: تثبيت + scrub (الشاشات الواسعة فقط) */
+      if (ctx.conditions.desk) {
+        var steps = $$('.step');
+        var phones = steps.map(function (s) { return s.querySelector('.phone'); });
+        var side = steps.map(function (s) { return [s.querySelector('.step-text'), s.querySelector('.step-num')]; });
+        gsap.set(phones.slice(1), { opacity: 0 });
+        gsap.set(side.slice(1), { opacity: 0 });
+        var tl = gsap.timeline({
+          defaults: { duration: .45, ease: 'power2.inOut' },
+          scrollTrigger: { trigger: '.scene-pin', start: 'top top', end: '+=230%', pin: true, scrub: .6, anticipatePin: 1, invalidateOnRefresh: true }
+        });
+        tl.fromTo(phones, { rotation: -4 * sx }, { rotation: 4 * sx, duration: 3, ease: 'none' }, 0);
+        [1, 2].forEach(function (i) {
+          tl.to(side[i - 1], { opacity: 0, y: -48 }, i - .3)
+            .to(phones[i], { opacity: 1 }, i - .3)
+            .fromTo(side[i], { opacity: 0, y: 48, x: 24 * sx }, { opacity: 1, y: 0, x: 0 }, i + .05);
+        });
+      }
+
+      /* خطوات الاستخدام: تظهر متتابعة، وتنزلق باتجاه القراءة */
+      gsap.from('.howto li', { opacity: 0, y: 30, x: ctx.conditions.desk ? 30 * sx : 0, duration: .8, ease: 'power3.out', stagger: .1, clearProps: 'all', scrollTrigger: { trigger: '.howto', start: 'top 85%', once: true } });
+
+      /* بطاقتا المنصتين */
+      $$('.plat').forEach(function (el, i) {
+        gsap.from(el, { opacity: 0, x: ctx.conditions.desk ? (i ? -40 : 40) * sx : 0, y: ctx.conditions.desk ? 0 : 32, duration: .9, ease: 'power3.out', clearProps: 'all', scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
+      });
+
+      /* شبكة المزايا: ظهور متتابع */
+      var cards = $$('.bento .card');
+      gsap.set(cards, { opacity: 0, y: 32 });
+      ScrollTrigger.batch(cards, {
+        start: 'top 88%', once: true,
+        onEnter: function (b) { gsap.to(b, { opacity: 1, y: 0, duration: .8, ease: 'power3.out', stagger: .09, overwrite: true, clearProps: 'all' }); }
+      });
+
+      /* الخط الزمني: الخط يُرسم مع النزول والأخبار تظهر واحداً بعد الآخر */
+      gsap.fromTo('.tl-line', { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#timeline', start: 'top 75%', end: 'bottom 60%', scrub: true } });
+      entries.forEach(function (el) {
+        gsap.from(el, { opacity: 0, y: 26, x: 22 * sx, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 84%', once: true } });
+      });
+
+      /* رسالة المنشئ */
+      gsap.from('.letter > *', { opacity: 0, y: 30, duration: .9, ease: 'power3.out', stagger: .15, scrollTrigger: { trigger: '.letter', start: 'top 80%', once: true } });
+
+      /* الأرقام: عدّ تصاعدي مرة واحدة */
+      if (!counted) {
+        counters.forEach(function (c) { c.v = 0; renderCount(c); });
+        ScrollTrigger.create({
+          trigger: '.stats', start: 'top 85%', once: true,
+          onEnter: function () {
+            counted = true;
+            counters.forEach(function (c) { gsap.to(c, { v: c.target, duration: 1.8, ease: 'power2.out', onUpdate: function () { renderCount(c); } }); });
+          }
+        });
+      }
+
+      /* القسم الأخير: من الكريمي إلى الزيتي الغامق (opacity لطبقة الخلفية) */
+      gsap.fromTo('.cta-bg', { opacity: 0 }, { opacity: 1, ease: 'none', scrollTrigger: { trigger: '.cta', start: 'top 95%', end: 'top 40%', scrub: true } });
+      gsap.fromTo('.cta-in', { opacity: 0, y: 40 }, { opacity: 1, y: 0, ease: 'none', scrollTrigger: { trigger: '.cta', start: 'top 70%', end: 'top 30%', scrub: true } });
+
+      return function () { /* عند الإلغاء قبل اكتمال العدّ: أعد الأرقام النهائية */
+        if (!counted) counters.forEach(function (c) { gsap.killTweensOf(c); c.v = c.target; renderCount(c); });
+      };
+    });
+  }
+
+  function heroIntro() {
+    if (!hasGsap || reduce.matches) { root.classList.remove('pre'); return; }
+    var tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    tl.from('.line-in', { yPercent: 115, duration: 1, stagger: .14 })
+      .from('.hero-sub', { opacity: 0, y: 22, duration: .7 }, '-=.45')
+      .from('.hero .btn', { opacity: 0, y: 18, duration: .6, stagger: .09, clearProps: 'all' }, '-=.35')
+      .from('.hero-phone', { opacity: 0, y: 140, duration: 1.2, ease: 'power3.out' }, '-=.3');
+    root.classList.remove('pre');
+  }
+
+  /* ═════════ تبديل اللغة ═════════ */
+  function refreshSoon() {
+    if (!hasGsap) return;
+    ScrollTrigger.refresh();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+  }
+  function currentAnchor() { /* القسم الظاهر الآن ونسبة التقدّم فيه، لنعود إليه بعد تغيّر الأطوال */
+    var mid = window.scrollY + window.innerHeight / 2, best = null;
+    $$('main > section').forEach(function (s) {
+      var top = s.getBoundingClientRect().top + window.scrollY;
+      if (top <= mid) best = { el: s, ratio: (mid - top) / s.offsetHeight };
+    });
+    return best;
+  }
+  langBtn.addEventListener('click', function () {
+    var anchor = window.scrollY > 10 ? currentAnchor() : null;
+    root.classList.add('lang-out');
+    setTimeout(function () {
+      lang = isRTL() ? 'en' : 'ar';
+      try { localStorage.setItem('site-lang', lang); } catch (e) {}
+      killMotion();
+      applyLang();
+      buildMotion();     /* تُبنى المشاهد من جديد بالاتجاه الأفقي المعكوس */
+      refreshSoon();     /* ثم تُعاد حسابات ScrollTrigger بعد تغيّر أطوال النصوص */
+      if (anchor) {
+        var top = anchor.el.getBoundingClientRect().top + window.scrollY + anchor.ratio * anchor.el.offsetHeight - window.innerHeight / 2;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+      }
+      requestAnimationFrame(function () { root.classList.remove('lang-out'); });
+    }, 230);
+  });
+
+  /* ═════════ الإقلاع ═════════ */
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+  applyLang();
+  heroIntro();
+  buildMotion();
+  refreshSoon();
+  window.addEventListener('load', function () { if (hasGsap) ScrollTrigger.refresh(); });
+  if (reduce.addEventListener) reduce.addEventListener('change', function () { root.classList.toggle('no-pin', !hasGsap || reduce.matches); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>صطوف محمد خير — مهندس برمجيات</title>
+<meta name="description" content="صطوف محمد خير، مهندس برمجيات ومطوّر Full-Stack و.NET: المشاريع، المهارات، والتعليم.">
+<meta name="theme-color" content="#F4F3EF">
+<!--
+  الصفحة الشخصية (السيرة). لكل مشروع صفحته الخاصة بهويته، مثل sanad/.
+  لإضافة مشروع: انسخ <li class="proj"> في قسم المشاريع، وأضف نصوصه الإنجليزية في كائن EN.
+  وإن صار للمشروع صفحة مستقلة فانسخ مجلد sanad/ واجعل الرابط يشير إليه.
+-->
+<script>
+(function () {
+  var r = document.documentElement, lang = 'ar';
+  try { lang = localStorage.getItem('site-lang') || 'ar'; } catch (e) {}
+  if (lang === 'en') { r.lang = 'en'; r.dir = 'ltr'; }
+  if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    r.classList.add('pre');
+    setTimeout(function () { r.classList.remove('pre'); }, 3500);
+  }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F4F3EF;
+  --card: #FFFFFF;
+  --ink: #15171B;
+  --text: #3B3F46;
+  --muted: #5C6169;
+  --accent: #0E6B57;
+  --accent-soft: #E1EEE9;
+  --line: rgba(21, 23, 27, .12);
+  --shadow: 0 1px 2px rgba(21, 23, 27, .04), 0 16px 36px -28px rgba(21, 23, 27, .3);
+  --head: "Readex Pro", "Segoe UI", Tahoma, sans-serif;
+  --body: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --gutter: clamp(20px, 5vw, 56px);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--text); font: 400 1.03rem/1.85 var(--body); transition: opacity .22s ease; }
+html[lang="en"] body { line-height: 1.65; }
+html.lang-out body { opacity: 0; }
+main { overflow-x: clip; }
+h1, h2, h3 { font-family: var(--head); color: var(--ink); margin: 0; line-height: 1.3; }
+p { margin: 0; }
+a { color: inherit; }
+ul { list-style: none; margin: 0; padding: 0; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(1080px, 100% - 2 * var(--gutter)); margin-inline: auto; }
+.skip { position: absolute; inset-inline-start: 12px; top: -60px; z-index: 100; background: var(--ink); color: #fff; padding: 8px 16px; border-radius: 10px; transition: top .2s; }
+.skip:focus { top: 12px; }
+.flip { display: inline-block; }
+[dir="rtl"] .flip { transform: scaleX(-1); }
+.mono { font-family: var(--mono); direction: ltr; unicode-bidi: isolate; }
+
+/* ───── الشريط العلوي ───── */
+.nav { position: fixed; inset: 0 0 auto; z-index: 50; transition: background-color .3s, box-shadow .3s; }
+.nav.is-scrolled { background: rgba(244, 243, 239, .94); box-shadow: 0 1px 0 var(--line); }
+.nav-in { display: flex; align-items: center; gap: 26px; height: 64px; }
+.brand { font: 600 1rem/1 var(--head); color: var(--ink); text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
+.brand i { width: 10px; height: 10px; border-radius: 3px; background: var(--accent); }
+.nav-links { display: none; gap: 24px; margin-inline-start: auto; }
+.nav-links a { text-decoration: none; font-size: .93rem; font-weight: 500; color: var(--ink); padding: 4px 0; background: linear-gradient(currentColor, currentColor) no-repeat 50% 100% / 0 1px; transition: background-size .3s var(--ease); }
+.nav-links a:hover { background-size: 100% 1px; }
+.lang { margin-inline-start: auto; min-height: 38px; padding: 6px 14px; border: 1px solid var(--ink); background: transparent; color: var(--ink); border-radius: 8px; font: 500 .85rem/1 var(--body); cursor: pointer; transition: background-color .25s, color .25s; }
+.lang:hover { background: var(--ink); color: #fff; }
+@media (min-width: 860px) { .nav-links { display: flex; } .lang { margin-inline-start: 0; } }
+
+/* ───── الأزرار ───── */
+.btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 20px; border-radius: 10px; font: 500 .97rem/1.2 var(--body); text-decoration: none; border: 1px solid var(--ink); transition: translate .25s var(--ease), background-color .25s, color .25s, box-shadow .25s; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn.solid { background: var(--ink); color: #fff; }
+.btn.solid:hover { translate: 0 -2px; box-shadow: 0 12px 22px -14px rgba(21, 23, 27, .6); }
+.btn.outline { color: var(--ink); }
+.btn.outline:hover { background: var(--ink); color: #fff; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* ───── التعريف ───── */
+.hero { padding-block: clamp(120px, 18vh, 180px) clamp(64px, 9vw, 110px); border-bottom: 1px solid var(--line); }
+.hero-grid { display: grid; gap: 36px; align-items: center; }
+.role { font: 500 .82rem/1.6 var(--mono); color: var(--accent); letter-spacing: .02em; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(2.6rem, 8vw, 5.4rem); font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
+html[lang="en"] .hero h1 { letter-spacing: -.035em; }
+.line { display: block; overflow: hidden; padding-block: .06em; }
+.line-in { display: block; will-change: transform; }
+.title { font: 500 clamp(1.15rem, 2.2vw, 1.5rem)/1.5 var(--head); color: var(--ink); margin-top: 14px; }
+.lead { font-size: clamp(1.05rem, 1.6vw, 1.2rem); max-width: 54ch; margin-top: 18px; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 26px; font-size: .93rem; color: var(--muted); }
+.meta span { display: inline-flex; align-items: center; gap: 8px; }
+.meta svg { width: 16px; height: 16px; color: var(--ink); }
+.status { color: var(--accent); font-weight: 500; }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.hero .btns { margin-top: 32px; }
+.avatar { width: clamp(140px, 20vw, 220px); aspect-ratio: 1; border-radius: 24px; object-fit: cover; background: var(--accent-soft); box-shadow: var(--shadow); border: 1px solid var(--line); }
+@media (min-width: 860px) { .hero-grid { grid-template-columns: 1fr auto; } }
+.pre .line-in, .pre .title, .pre .lead, .pre .meta, .pre .hero .btns > *, .pre .avatar { opacity: 0; }
+
+/* ───── أقسام السيرة ───── */
+.sec { display: grid; gap: 22px; padding-block: clamp(56px, 8vw, 96px); border-bottom: 1px solid var(--line); }
+.sec-label { font: 600 .95rem/1.4 var(--head); color: var(--ink); display: flex; gap: 10px; align-items: baseline; }
+.sec-label .mono { font-size: .75rem; color: var(--accent); font-weight: 500; }
+@media (min-width: 860px) {
+  .sec { grid-template-columns: 210px 1fr; gap: 48px; }
+  .sec-label { position: sticky; top: 96px; align-self: start; flex-direction: column; gap: 6px; }
+}
+.about p { font-size: 1.1rem; max-width: 62ch; color: var(--ink); }
+.about p + p { margin-top: 14px; color: var(--text); font-size: 1.02rem; }
+
+/* المشاريع */
+.featured { display: grid; gap: 24px; align-items: center; padding: clamp(24px, 4vw, 40px); border-radius: 18px; text-decoration: none; background: #0E1E24; color: #DCE3E3; box-shadow: var(--shadow); transition: translate .3s var(--ease), box-shadow .3s var(--ease); }
+.featured:hover { translate: 0 -4px; box-shadow: 0 24px 44px -26px rgba(14, 30, 36, .7); }
+.featured h3 { color: #F5EAD8; font-family: "Readex Pro", sans-serif; font-size: 1.9rem; }
+.featured p { margin-top: 8px; max-width: 52ch; }
+.featured .tags span { border-color: rgba(245, 234, 216, .25); color: #F5EAD8; }
+.featured .go { color: #F2C675; margin-top: 16px; display: inline-flex; gap: 8px; align-items: center; font-weight: 500; }
+.featured .go svg { width: 18px; height: 18px; transition: translate .3s var(--ease); }
+.featured:hover .go svg { translate: -4px 0; }
+[dir="ltr"] .featured:hover .go svg { translate: 4px 0; }
+.sanad-mark { width: 92px; height: 92px; border-radius: 22px; background: #0E1E24; border: 1px solid rgba(242, 198, 117, .35); display: grid; place-items: center; color: #F2C675; }
+.sanad-mark svg { width: 60px; }
+@media (min-width: 700px) { .featured { grid-template-columns: auto 1fr; gap: 32px; } }
+.kicker { font: 500 .75rem/1.4 var(--mono); color: #F2C675; letter-spacing: .04em; margin-bottom: 6px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tags span { unicode-bidi: isolate; font: 400 .74rem/1 var(--mono); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; direction: ltr; }
+.projects { display: grid; gap: 14px; margin-top: 14px; }
+@media (min-width: 700px) { .projects { grid-template-columns: 1fr 1fr; } }
+.proj a { display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 22px 22px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; text-decoration: none; transition: translate .3s var(--ease), border-color .3s, box-shadow .3s var(--ease); }
+.proj a:hover { translate: 0 -3px; border-color: rgba(14, 107, 87, .45); box-shadow: var(--shadow); }
+.proj-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.proj h3 { font-size: 1.12rem; font-weight: 600; }
+.proj-top svg { width: 16px; height: 16px; color: var(--muted); flex: none; transition: color .25s, translate .25s var(--ease); }
+.proj a:hover .proj-top svg { color: var(--accent); translate: 0 -2px; }
+.proj p { font-size: .95rem; color: var(--text); }
+.proj .tags { margin-top: auto; padding-top: 10px; }
+.note { margin-top: 18px; font-size: .92rem; color: var(--muted); }
+
+/* المهارات */
+.skills { display: grid; gap: 0; }
+.skill { display: grid; gap: 8px; padding-block: 16px; border-top: 1px solid var(--line); }
+.skill:first-child { border-top: 0; padding-top: 0; }
+.skill h3 { font-size: .98rem; font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { unicode-bidi: isolate; font: 400 .8rem/1 var(--mono); background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; direction: ltr; }
+@media (min-width: 700px) { .skill { grid-template-columns: 180px 1fr; gap: 20px; align-items: baseline; } }
+
+/* التعليم واللغات */
+.edu { display: grid; gap: 4px; }
+.edu h3 { font-size: 1.2rem; }
+.edu .when { font: 500 .82rem/1.5 var(--mono); color: var(--accent); }
+.edu p { color: var(--muted); }
+.topics { margin-top: 22px; }
+.topics h3 { font-size: .98rem; font-weight: 600; margin-bottom: 10px; }
+.topics .chips span { font-family: var(--body); direction: inherit; background: var(--accent-soft); border-color: transparent; color: #0B4D3F; font-size: .85rem; }
+.langs { display: grid; gap: 10px; }
+.langs li { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px dashed var(--line); max-width: 420px; }
+.langs li:last-child { border-bottom: 0; }
+.langs b { color: var(--ink); font-weight: 500; }
+.langs span { color: var(--muted); }
+
+/* تواصل */
+.contact p { font-size: 1.1rem; color: var(--ink); max-width: 46ch; margin-bottom: 22px; }
+footer { padding-block: 28px; font-size: .88rem; color: var(--muted); }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">تخطَّ إلى المحتوى</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><i aria-hidden="true"></i><span data-i18n="navName">صطوف محمد خير</span></a>
+    <nav class="nav-links" data-i18n-label="navLabel" aria-label="أقسام الصفحة">
+      <a href="#projects" data-i18n="navProjects">المشاريع</a>
+      <a href="#skills" data-i18n="navSkills">المهارات</a>
+      <a href="#education" data-i18n="navEdu">التعليم</a>
+      <a href="#contact" data-i18n="navContact">تواصل</a>
+    </nav>
+    <button class="lang" id="lang" type="button" lang="en" aria-label="Switch to English">English</button>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="role mono">Software Engineer · Full-Stack &amp; .NET</p>
+      <h1><span class="line"><span class="line-in" data-i18n="name">صطوف محمد خير</span></span></h1>
+      <p class="title" data-i18n="title">مهندس برمجيات · مطوّر Full-Stack و&#x2066;.NET&#x2069;</p>
+      <p class="lead" data-i18n="lead">أبني تطبيقات ويب وجوال جاهزة للإنتاج بـ &#x2066;.NET&#x2069; وReact وFlutter، على أساس Clean Architecture وDDD، وأدمج الذكاء الاصطناعي في منتجات تعمل فعلاً.</p>
+      <p class="meta">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="loc">توكات، تركيا</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><span data-i18n="study">طالب هندسة حاسوب · التخرج ٢٠٢٧</span></span>
+        <span class="status" data-i18n="open">متاح للتدريب والوظائف المبتدئة</span>
+      </p>
+      <div class="btns">
+        <a class="btn solid" href="#projects"><span data-i18n="ctaProjects">المشاريع</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        <a class="btn outline" href="https://github.com/Sattuf" rel="noopener me"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 015 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0012 2z"/></svg>GitHub</a>
+        <a class="btn outline" href="mailto:sattufmuhammedhayr@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span data-i18n="ctaMail">راسلني</span></a>
+      </div>
+    </div>
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/204247349?v=4&amp;s=440" width="220" height="220" alt="صورة صطوف محمد خير" data-i18n-alt="altAvatar">
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="sec about" id="about">
+    <h2 class="sec-label"><span class="mono">01</span><span data-i18n="secAbout">نبذة</span></h2>
+    <div>
+      <p data-i18n="ab1">أكتب برمجيات تعمل في الإنتاج، لا نماذج تجريبية فقط. أبدأ من بنية واضحة وأنتهي بنظام يمكن مراقبته وتشغيله.</p>
+      <p data-i18n="ab2">أعمل على الواجهة الخلفية بـ &#x2066;.NET&#x2069; وNode.js وPython، والواجهات بـ React وNext.js، والجوال بـ Flutter. وأدمج الذكاء الاصطناعي حيث يضيف قيمة حقيقية: Google Gemini وخطوط RAG ونماذج تعلّم الآلة والرؤية الحاسوبية. وأهتم بتشغيل ما أكتبه: Docker وOpenTelemetry وPrometheus وGrafana.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="projects">
+    <h2 class="sec-label"><span class="mono">02</span><span data-i18n="secProjects">المشاريع</span></h2>
+    <div>
+      <!-- سند: يفتح صفحته الخاصة بهويته -->
+      <a class="featured" href="sanad/">
+        <span class="sanad-mark" aria-hidden="true"><svg viewBox="90 128 336 252"><path d="M398 156V222Q398 252 370 252Q342 252 342 222V190V222Q342 252 314 252Q286 252 286 222V190V236C286 320 252 352 202 352C150 352 118 322 118 288" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/><path d="M118 292V259" fill="none" stroke="currentColor" stroke-width="40"/><path d="M98 260L138 260L190 182Z" fill="currentColor"/><circle cx="202" cy="260" r="26" fill="currentColor"/></svg></span>
+        <span>
+          <span class="kicker mono" style="display:block">Featured · Android &amp; iOS</span>
+          <h3 data-i18n="sName">سند</h3>
+          <p data-i18n="sDesc">تطبيق مجاني للأذكار والرقية الشرعية: ورد يومي بالعدّاد، رقية مكتوبة ومسموعة بمصادرها، مواقيت الصلاة، ومذكّرة مشفّرة على الجهاز.</p>
+          <span class="tags"><span>Flutter</span><span>.NET 9</span><span>React</span><span>PostgreSQL</span><span>Firebase</span></span>
+          <span class="go"><span data-i18n="sGo">صفحة المشروع: الأخبار وطريقة الاستخدام</span><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </a>
+
+      <ul class="projects">
+        <li class="proj"><a href="https://github.com/Sattuf/ParseAI" rel="noopener">
+          <span class="proj-top"><h3>ParseAI</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          <p data-i18n="p1">ارفع ملف PDF، فيحلّله Google Gemini وتحاوره عبر RAG بتقطيع ذكي وإجابات متدفّقة.</p>
+          <span class="tags"><span>.NET 9</span><span>EF Core</span><span>React</span><span>Gemini API</span></span>
+        </a></li>
+        <li class="proj"><a href="https://github.com/Sattuf/marad-marketplace" rel="noopener">
+          <span class="proj-top"><h3 data-i18n="p2n">معرض الأشياء</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          <p data-i18n="p2">سوق بيع وشراء بين الأفراد: تطبيق جوال وموقع وخدمات مصغّرة للبحث والمحادثة وكشف الاحتيال والتخصيص.</p>
+          <span class="tags"><span>Flutter</span><span>Next.js</span><span>NestJS</span><span>PostgreSQL</span><span>Redis</span><span>Elasticsearch</span><span>Docker</span></span>
+        </a></li>
+        <li class="proj"><a href="https://github.com/Sattuf/emlak-ai" rel="noopener">
+          <span class="proj-top"><h3>EmlakAI</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          <p data-i18n="p3">يتوقّع أسعار بيع العقارات وإيجارها في سيواس وتوكات بنماذج Gradient Boosting.</p>
+          <span class="tags"><span>Python</span><span>scikit-learn</span><span>FastAPI</span><span>React</span></span>
+        </a></li>
+        <li class="proj"><a href="https://github.com/Sattuf/hand-gesture-effects" rel="noopener">
+          <span class="proj-top"><h3 data-i18n="p4n">مؤثرات إيماءات اليد</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          <p data-i18n="p4">يتعرّف على ثماني إيماءات لليد من الكاميرا لحظياً، ويطبّق لكل إيماءة مؤثراً بصرياً مختلفاً.</p>
+          <span class="tags"><span>Python</span><span>OpenCV</span><span>MediaPipe</span></span>
+        </a></li>
+        <li class="proj"><a href="https://github.com/Sattuf/face-filters" rel="noopener">
+          <span class="proj-top"><h3 data-i18n="p5n">مرشّحات الوجه</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          <p data-i18n="p5">يكشف الوجوه لحظياً ويطبّق على منطقة الوجه سبعة مرشّحات لمعالجة الصور مثل Gaussian وSobel وLaplacian.</p>
+          <span class="tags"><span>Python</span><span>OpenCV</span><span>MediaPipe</span></span>
+        </a></li>
+        <li class="proj"><a href="https://github.com/Sattuf/minesweeper-flutter" rel="noopener">
+          <span class="proj-top"><h3 data-i18n="p6n">كاسحة الألغام</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+          <p data-i18n="p6">لعبة كاسحة الألغام لكل المنصات بواجهة عربية ومنطق كامل لحالة اللعب.</p>
+          <span class="tags"><span>Flutter</span><span>Dart</span></span>
+        </a></li>
+      </ul>
+      <p class="note" data-i18n="other">أعمال أخرى خاصة: نظام ورشة صيانة ونظام لبيع الدراجات النارية وتأجيرها (ASP.NET Core 9 وBlazor WebAssembly وSQL Server)، ومتجر إلكتروني للزهور، وموقع Qatibi.com (Node.js وExpress وMongoDB).</p>
+    </div>
+  </section>
+
+  <section class="sec" id="skills">
+    <h2 class="sec-label"><span class="mono">03</span><span data-i18n="secSkills">المهارات</span></h2>
+    <div class="skills">
+      <div class="skill"><h3 data-i18n="k1">الواجهة الخلفية</h3><div class="chips"><span>C#</span><span>.NET 9</span><span>ASP.NET Core</span><span>EF Core</span><span>Node.js</span><span>Express</span><span>NestJS</span><span>Python</span><span>FastAPI</span></div></div>
+      <div class="skill"><h3 data-i18n="k2">الواجهات والجوال</h3><div class="chips"><span>React</span><span>Next.js</span><span>TypeScript</span><span>Blazor WASM</span><span>Vite</span><span>Flutter</span><span>Dart</span></div></div>
+      <div class="skill"><h3 data-i18n="k3">البيانات والذكاء الاصطناعي</h3><div class="chips"><span>SQL Server</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span><span>Elasticsearch</span><span>Firebase</span><span>Gemini API</span><span>RAG</span><span>scikit-learn</span><span>OpenCV</span><span>MediaPipe</span></div></div>
+      <div class="skill"><h3 data-i18n="k4">التشغيل والمراقبة</h3><div class="chips"><span>Docker</span><span>Azure</span><span>OpenTelemetry</span><span>Prometheus</span><span>Grafana</span><span>Git</span></div></div>
+      <div class="skill"><h3 data-i18n="k5">البنية</h3><div class="chips"><span>Clean Architecture</span><span>DDD</span><span>Microservices</span><span>REST</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="education">
+    <h2 class="sec-label"><span class="mono">04</span><span data-i18n="secEdu">التعليم</span></h2>
+    <div>
+      <div class="edu">
+        <span class="when" data-i18n="eduWhen">حتى ٢٠٢٧ (متوقّع)</span>
+        <h3 data-i18n="eduDeg">بكالوريوس هندسة الحاسوب</h3>
+        <p data-i18n="eduUni">جامعة توكات غازي عثمان باشا، تركيا</p>
+      </div>
+      <div class="topics">
+        <h3 data-i18n="topicsTitle">مواضيع عملت عليها</h3>
+        <div class="chips">
+          <span data-i18n="t1">تعلّم الآلة</span><span data-i18n="t2">الرؤية الحاسوبية</span><span data-i18n="t3">معالجة الصور</span><span data-i18n="t4">نماذج اللغة وRAG</span><span data-i18n="t5">الخدمات المصغّرة</span><span data-i18n="t6">البحث النصي</span><span data-i18n="t7">تطوير الألعاب</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="languages">
+    <h2 class="sec-label"><span class="mono">05</span><span data-i18n="secLangs">اللغات</span></h2>
+    <ul class="langs">
+      <li><b data-i18n="la1">العربية</b><span data-i18n="la1l">اللغة الأم</span></li>
+      <li><b data-i18n="la2">التركية</b><span data-i18n="la2l">متقدّم</span></li>
+      <li><b data-i18n="la3">الإنجليزية</b><span data-i18n="la3l">متوسط</span></li>
+    </ul>
+  </section>
+
+  <section class="sec contact" id="contact">
+    <h2 class="sec-label"><span class="mono">06</span><span data-i18n="secContact">تواصل</span></h2>
+    <div>
+      <p data-i18n="contactLine">للتدريب أو العمل أو أي مشروع مشترك، يسعدني أن تكتب لي.</p>
+      <div class="btns">
+        <a class="btn solid" href="mailto:sattufmuhammedhayr@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span class="mono">sattufmuhammedhayr@gmail.com</span></a>
+        <a class="btn outline" href="https://github.com/Sattuf" rel="noopener me"><span class="mono">github.com/Sattuf</span></a>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span data-i18n="footCopy">© ٢٠٢٦ صطوف محمد خير</span>
+    <a href="sanad/" data-i18n="footSanad">سند</a>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  var EN = {
+    title: 'Satouf Mohamad Kheir — Software Engineer',
+    skip: 'Skip to content', navName: 'Satouf Mohamad Kheir', navLabel: 'Page sections',
+    navProjects: 'Projects', navSkills: 'Skills', navEdu: 'Education', navContact: 'Contact',
+    name: 'Satouf Mohamad Kheir', title: 'Software Engineer · Full-Stack & .NET Developer',
+    lead: 'I build production-ready web and mobile apps with .NET, React and Flutter, on Clean Architecture and DDD, and I integrate AI into products that actually ship.',
+    loc: 'Tokat, Türkiye', study: 'Computer Engineering student · graduating 2027', open: 'Open to internships and junior roles',
+    ctaProjects: 'Projects', ctaMail: 'Email me', altAvatar: 'Photo of Satouf Mohamad Kheir',
+    secAbout: 'About',
+    ab1: 'I write software that runs in production, not just prototypes. I start from a clear architecture and finish with a system that can be observed and operated.',
+    ab2: 'I work on the backend with .NET, Node.js and Python, on the frontend with React and Next.js, and on mobile with Flutter. I bring in AI where it adds real value: Google Gemini, RAG pipelines, machine-learning models and computer vision. And I care about running what I write: Docker, OpenTelemetry, Prometheus and Grafana.',
+    secProjects: 'Projects',
+    sName: 'Sanad', sDesc: 'A free adhkar and ruqyah app: a daily wird with a counter, written and recited ruqyah with sources, prayer times, and an on-device encrypted journal.',
+    sGo: 'Project page: news and how to use it',
+    p1: 'Upload a PDF, have Google Gemini analyse it, and chat with it through RAG with smart chunking and streamed answers.',
+    p2n: 'Ma’rad Al-Ashya', p2: 'A person-to-person marketplace: mobile app, website, and microservices for search, chat, fraud detection and personalisation.',
+    p3: 'Predicts sale and rent prices for real estate in Sivas and Tokat with Gradient Boosting models.',
+    p4n: 'Hand Gesture Effects', p4: 'Recognises eight hand gestures from the webcam in real time and applies a different visual effect to each.',
+    p5n: 'Face Filters', p5: 'Detects faces in real time and applies seven image-processing filters, such as Gaussian, Sobel and Laplacian, to the face region.',
+    p6n: 'Minesweeper', p6: 'Cross-platform Minesweeper with an Arabic UI and full game-state logic.',
+    other: 'Other private work: a mechanic-shop system and a motorcycle sales and rental system (ASP.NET Core 9, Blazor WebAssembly, SQL Server), a florist e-commerce store, and Qatibi.com (Node.js, Express, MongoDB).',
+    secSkills: 'Skills', k1: 'Backend', k2: 'Frontend & mobile', k3: 'Data & AI', k4: 'DevOps & observability', k5: 'Architecture',
+    secEdu: 'Education', eduWhen: 'Expected 2027', eduDeg: 'B.Sc. in Computer Engineering', eduUni: 'Tokat Gaziosmanpaşa University, Türkiye',
+    topicsTitle: 'Topics I have worked on', t1: 'Machine learning', t2: 'Computer vision', t3: 'Image processing', t4: 'LLMs & RAG', t5: 'Microservices', t6: 'Full-text search', t7: 'Game development',
+    secLangs: 'Languages', la1: 'Arabic', la1l: 'Native', la2: 'Turkish', la2l: 'Advanced', la3: 'English', la3l: 'Intermediate',
+    secContact: 'Contact', contactLine: 'For internships, roles, or a project together, I would be glad to hear from you.',
+    footCopy: '© 2026 Satouf Mohamad Kheir', footSanad: 'Sanad'
+  };
+  var AR = { title: document.title };
+  var textEls = $$('[data-i18n]'), labelEls = $$('[data-i18n-label]'), altEls = $$('[data-i18n-alt]');
+  textEls.forEach(function (el) { AR[el.dataset.i18n] = el.textContent; });
+  labelEls.forEach(function (el) { AR[el.dataset.i18nLabel] = el.getAttribute('aria-label'); });
+  altEls.forEach(function (el) { AR[el.dataset.i18nAlt] = el.alt; });
+
+  var lang = root.lang === 'en' ? 'en' : 'ar';
+  var langBtn = document.getElementById('lang');
+  var isRTL = function () { return lang === 'ar'; };
+
+  function applyLang() {
+    var d = lang === 'en' ? EN : AR;
+    root.lang = lang; root.dir = isRTL() ? 'rtl' : 'ltr';
+    document.title = d.title;
+    textEls.forEach(function (el) { var v = d[el.dataset.i18n]; if (v != null) el.textContent = v; });
+    labelEls.forEach(function (el) { var v = d[el.dataset.i18nLabel]; if (v != null) el.setAttribute('aria-label', v); });
+    altEls.forEach(function (el) { var v = d[el.dataset.i18nAlt]; if (v != null) el.alt = v; });
+    langBtn.textContent = isRTL() ? 'English' : 'العربية';
+    langBtn.lang = isRTL() ? 'en' : 'ar';
+    langBtn.setAttribute('aria-label', isRTL() ? 'Switch to English' : 'التبديل إلى العربية');
+  }
+
+  var nav = document.getElementById('nav');
+  function onScroll() { nav.classList.toggle('is-scrolled', window.scrollY > 24); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var hasGsap = !!(window.gsap && window.ScrollTrigger);
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var mm = null;
+
+  function buildMotion() {
+    if (mm) { mm.revert(); mm = null; }
+    if (!hasGsap) return;
+    mm = gsap.matchMedia();
+    mm.add({ desk: '(min-width: 860px)', motion: '(prefers-reduced-motion: no-preference)' }, function (ctx) {
+      if (!ctx.conditions.motion) return;
+      var sx = isRTL() ? 1 : -1;
+      $$('.sec').forEach(function (sec) {
+        var items = sec.querySelectorAll('.sec-label, .about p, .featured, .proj, .note, .skill, .edu, .topics, .langs li, .contact p, .contact .btns');
+        gsap.from(items, { opacity: 0, y: 24, x: ctx.conditions.desk ? 20 * sx : 0, duration: .7, ease: 'power3.out', stagger: .07, clearProps: 'all', scrollTrigger: { trigger: sec, start: 'top 82%', once: true } });
+      });
+    });
+  }
+
+  function heroIntro() {
+    if (!hasGsap || reduce.matches) { root.classList.remove('pre'); return; }
+    gsap.timeline({ defaults: { ease: 'power4.out' } })
+      .from('.line-in', { yPercent: 110, duration: 1 })
+      .from('.title, .lead, .meta', { opacity: 0, y: 18, duration: .6, stagger: .1 }, '-=.5')
+      .from('.hero .btns > *', { opacity: 0, y: 14, duration: .5, stagger: .07, clearProps: 'all' }, '-=.3')
+      .from('.avatar', { opacity: 0, scale: .92, duration: .9, ease: 'power3.out' }, '-=.9');
+    root.classList.remove('pre');
+  }
+
+  langBtn.addEventListener('click', function () {
+    var y = window.scrollY, h = document.documentElement.scrollHeight;
+    root.classList.add('lang-out');
+    setTimeout(function () {
+      lang = isRTL() ? 'en' : 'ar';
+      try { localStorage.setItem('site-lang', lang); } catch (e) {}
+      applyLang();
+      buildMotion();
+      if (hasGsap) ScrollTrigger.refresh();
+      window.scrollTo({ top: y * document.documentElement.scrollHeight / h, behavior: 'instant' });
+      requestAnimationFrame(function () { root.classList.remove('lang-out'); });
+    }, 220);
+  });
+
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+  applyLang();
+  heroIntro();
+  buildMotion();
+  if (hasGsap && document.fonts) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+})();
+</script>
+</body>
+</html>
